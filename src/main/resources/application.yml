@@ -1,0 +1,9 @@
+spring.application.name: short-url-service
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/h2/db/shorturlservice
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create

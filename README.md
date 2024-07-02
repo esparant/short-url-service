@@ -1,9 +1,7 @@
 # Toy Project - Short Url Service
 ### A simple URL shortener service that converts long URLs into short, easy-to-share URLs.
-### Built With
 
 ### Built With
-
 - [Spring Boot](https://spring.io/projects/spring-boot) - The main framework used for developing the application.
 - [Spring MVC](https://docs.spring.io/spring-framework/docs/current/reference/html/web.html) - For building web applications.
 - [H2 Database](https://www.h2database.com/) - In-memory database used for development and testing.

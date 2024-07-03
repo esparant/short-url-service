@@ -21,10 +21,24 @@
     <div class="input-group mb-3">
         <input type="text" class="form-control" th:field="*{shortUrl}" placeholder="Short URL" aria-label="Short URL"
                readonly style="min-width: 0; flex-grow: 1;">
-        <button class="btn btn-outline-secondary" type="button">복사</button>
+        <button class="btn btn-outline-secondary" onclick="copyToClipboard()" type="button">복사</button>
     </div>
     <p th:if="*{shortUrl != null}" class="text-success">성공!</p>
-
 </div>
+<script>
+    function copyToClipboard() {
+        var copyText = document.getElementById('shortUrl')
+
+        copyText.select();
+        copyText.setSelectionRange(0, 1557);
+
+        navigator.clipboard.writeText(copyText.value).then(function() {
+            alert('복사 완료!');
+        }, function (err) {
+            console.error('복사 실패', err)
+        });
+    }
+
+</script>
 </body>
 </html>

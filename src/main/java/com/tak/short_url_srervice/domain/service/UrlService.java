@@ -39,9 +39,8 @@ public class UrlService {
     }
 
     private String isUniqueUrl() {
-        String shortUrl;
         while(true) {
-            shortUrl = createShortUrl();
+            String shortUrl = createShortUrl();
             if (getUrlByShortUrl(shortUrl).isEmpty()) {
                 return shortUrl;
             }

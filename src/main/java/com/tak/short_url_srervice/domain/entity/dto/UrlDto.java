@@ -16,7 +16,7 @@ public class UrlDto {
     public UrlDto(Url url, HttpServletRequest request) {
         this.id = url.getId();
         this.url = url.getUrl();
-        shortUrl = createFullShortUrl(request) + "/" + url.getShortUrl();
+        shortUrl = getDefaultHostUrl(request) + "/" + url.getShortUrl();
     }
 
     private Long id;
@@ -26,7 +26,7 @@ public class UrlDto {
 
     private String shortUrl;
 
-    private String createFullShortUrl(HttpServletRequest request) {
+    private String getDefaultHostUrl(HttpServletRequest request) {
         return ServletUriComponentsBuilder.fromRequestUri(request)
                 .replacePath(null)
                 .build().toUriString();

@@ -2,14 +2,12 @@ package com.tak.short_url_srervice.domain.service;
 
 import com.tak.short_url_srervice.domain.entity.Url;
 import com.tak.short_url_srervice.domain.repository.UrlRepository;
-import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @Transactional(readOnly = true)
 @Service
@@ -19,19 +17,9 @@ public class UrlService {
     private final UrlRepository ur;
 
     @Transactional
-    public Url saveUrl(Url url, HttpServletRequest request) {
-        url.setShortUrl(isUniqueUrl(request));
+    public Url saveUrl(Url url) {
+        url.setShortUrl(isUniqueUrl());
         return ur.save(url);
-    }
-
-    private String isUniqueUrl(HttpServletRequest request) {
-        String shortUrl;
-        while(true) {
-            shortUrl = createShortUrl(request);
-            if (getUrlByShortUrl(shortUrl).isEmpty()) {
-                return shortUrl;
-            }
-        }
     }
 
     public Url getUrl(Long id) {
@@ -46,11 +34,17 @@ public class UrlService {
         return ur.findByShortUrl(shortUrl);
     }
 
-    private String createShortUrl(HttpServletRequest request) {
-        String hostUrl = ServletUriComponentsBuilder.fromRequestUri(request)
-                .replacePath(null)
-                .toUriString();
-        String uuid = UUID.randomUUID().toString().substring(0, 8);
-        return hostUrl + "/" + uuid;
+    private String createShortUrl() {
+        return UUID.randomUUID().toString().substring(0, 8);
+    }
+
+    private String isUniqueUrl() {
+        String shortUrl;
+        while(true) {
+            shortUrl = createShortUrl();
+            if (getUrlByShortUrl(shortUrl).isEmpty()) {
+                return shortUrl;
+            }
+        }
     }
 }

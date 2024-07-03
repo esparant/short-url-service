@@ -28,8 +28,10 @@ public class UrlController {
     }
 
     @PostMapping("/short-url-service")
-    public String shortUrlService(@Valid @ModelAttribute("url") UrlDto urlDto, BindingResult bindingResult,
-                                  Model model, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+    public String shortUrlService(@Valid @ModelAttribute("url") UrlDto urlDto,
+                                  BindingResult bindingResult,
+                                  Model model, RedirectAttributes redirectAttributes,
+                                  HttpServletRequest request) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("url", urlDto);
@@ -37,8 +39,9 @@ public class UrlController {
             return "/url";
         }
 
-        Url url = urlService.saveUrl(new Url(urlDto), request);
-        redirectAttributes.addFlashAttribute("url", new UrlDto(url));
+        Url url = urlService.saveUrl(new Url(urlDto));
+
+        redirectAttributes.addFlashAttribute("url", new UrlDto(url, request));
 
         return "redirect:/short-url-service";
     }

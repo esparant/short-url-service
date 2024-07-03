@@ -1,20 +1,22 @@
 package com.tak.short_url_srervice.domain.entity.dto;
 
 import com.tak.short_url_srervice.domain.entity.Url;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.validator.constraints.URL;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @NoArgsConstructor
 @Data
 @ToString
 public class UrlDto {
 
-    public UrlDto(Url url) {
+    public UrlDto(Url url, HttpServletRequest request) {
         this.id = url.getId();
         this.url = url.getUrl();
-        this.shortUrl = url.getShortUrl();
+        shortUrl = createFullShortUrl(request) + "/" + url.getShortUrl();
     }
 
     private Long id;
@@ -24,5 +26,9 @@ public class UrlDto {
 
     private String shortUrl;
 
-
+    private String createFullShortUrl(HttpServletRequest request) {
+        return ServletUriComponentsBuilder.fromRequestUri(request)
+                .replacePath(null)
+                .build().toUriString();
+    }
 }

@@ -23,7 +23,7 @@ public class UrlController {
     private final UrlService urlService;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index() {
         return "index";
     }
 

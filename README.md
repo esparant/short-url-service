@@ -9,6 +9,7 @@ Spring Boot로 구축된 간단하고 효율적인 URL 단축 서비스로, 긴 
 - [필수 조건](#필수-조건)
 - [설치](#설치)
 - [사용법](#사용법)
+- [도커 사용법](#도커-사용법)
 - [사용 기술](#사용-기술)
 
 
@@ -25,7 +26,7 @@ Spring Boot로 구축된 간단하고 효율적인 URL 단축 서비스로, 긴 
 
 ### 필수 조건
 
-- Java 8 이상
+- Java 21
 - Gradle
 - H2 데이터베이스 (또는 다른 선호하는 데이터베이스)
 
@@ -52,16 +53,37 @@ Spring Boot로 구축된 간단하고 효율적인 URL 단축 서비스로, 긴 
 3. 생성된 짧은 URL을 복사하여 공유합니다.
 4. 짧은 URL을 브라우저에 입력하여 원본 URL로 리다이렉트됩니다.
 
-### 사용 기술
-	•	Spring Boot - 애플리케이션 개발을 위한 메인 프레임워크
-	•	Spring MVC - 웹 애플리케이션 구축
-	•	Spring Data JPA - 데이터베이스 액세스 및 관리
-	•	H2 Database - 개발 및 테스트용 인메모리 데이터베이스
-	•	Hibernate - 데이터베이스 엔터티 관리를 위한 ORM 프레임워크
-	•	Thymeleaf - 서버 사이드 Java 템플릿 엔진
-	•	Gradle - 빌드 자동화 및 의존성 관리
-	•	JUnit - 테스트 프레임워크
-	•	Lombok - 보일러플레이트 코드를 줄이는 Java 라이브러리
-	•	P6Spy - 애플리케이션이 실행하는 SQL 문을 로깅하는 프레임워크
-	•	Spring Boot Validation - 폼 입력 유효성 검사 프레임워크
+## 도커 사용법
 
+프로젝트는 도커를 사용하여 쉽게 빌드하고 실행할 수 있습니다.
+
+### Docker 이미지 빌드
+
+1. Docker를 설치합니다: [Docker 설치 링크](https://docs.docker.com/get-docker/)
+2. 도커 이미지를 빌드합니다:
+    ```sh
+    docker build -t short-url-service .
+    ```
+
+### Docker 컨테이너 실행
+
+1. 도커 컨테이너를 실행합니다:
+    ```sh
+    docker run -p 8080:8080 short-url-service
+    ```
+2. 웹 브라우저를 열고 `http://localhost:8080`으로 이동하여 애플리케이션이 실행 중인지 확인합니다.
+
+### 사용 기술
+```
+• Spring Boot - 애플리케이션 개발을 위한 메인 프레임워크
+• Spring MVC - 웹 애플리케이션 구축
+• Spring Data JPA - 데이터베이스 액세스 및 관리
+• H2 Database - 개발 및 테스트용 인메모리 데이터베이스
+• Hibernate - 데이터베이스 엔터티 관리를 위한 ORM 프레임워크
+• Thymeleaf - 서버 사이드 Java 템플릿 엔진
+• Gradle - 빌드 자동화 및 의존성 관리
+• JUnit - 테스트 프레임워크
+• Lombok - 보일러플레이트 코드를 줄이는 Java 라이브러리
+• P6Spy - 애플리케이션이 실행하는 SQL 문을 로깅하는 프레임워크
+• Spring Boot Validation - 폼 입력 유효성 검사 프레임워크
+```

@@ -30,7 +30,7 @@ public class UrlController {
 
     @GetMapping("/short-url-service")
     public String shortUrlService(@ModelAttribute("url") UrlDto url, Model model) {
-        return "/url";
+        return "url";
     }
 
     @PostMapping("/short-url-service")
@@ -42,7 +42,7 @@ public class UrlController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("url", urlDto);
             log.info("errors: {}", bindingResult.getAllErrors());
-            return "/url";
+            return "url";
         }
 
         Url url = urlService.saveUrl(new Url(urlDto));
@@ -51,6 +51,4 @@ public class UrlController {
 
         return "redirect:/short-url-service";
     }
-
-
 }
